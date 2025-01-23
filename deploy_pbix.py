@@ -69,4 +69,4 @@ if __name__ == "__main__":
     access_token = get_access_token(args.tenant_id, args.client_id, args.secret_id)
 
     if access_token:
-        deploy_pbix(args.workspace, args.filePath, access_token)
+        deploy_pbix(args.workspace_id, args.pbix_path, access_token)
