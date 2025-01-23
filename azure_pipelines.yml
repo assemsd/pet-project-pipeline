@@ -20,7 +20,7 @@ stages:
       - job: DeployReportToDev
         steps:
           - script: |
-              python -m pip install --upgrade pip
+              python3 -m pip install --upgrade pip
             displayName: 'Install Python dependencies'
           - script: |
               python $(scriptPath) --client_id $(client_id) --tenant_id $(tenant_id) --secret_id $(secret_id) --workspace_id $(dev_workspace_id) --pbix_path $(pbixFilePath)
@@ -34,7 +34,7 @@ stages:
       - job: DeployReportToTest
         steps:
           - script: |
-              python -m pip install --upgrade pip
+              python3 -m pip install --upgrade pip
             displayName: 'Install Python dependencies'
           - script: |
               python $(scriptPath) --client_id $(client_id) --tenant_id $(tenant_id) --secret_id $(secret_id) --workspace_id $(test_workspace_id) --pbix_path $(pbixFilePath)
@@ -48,7 +48,7 @@ stages:
       - job: DeployReportToProd
         steps:
           - script: |
-              python -m pip install --upgrade pip
+              python3 -m pip install --upgrade pip
             displayName: 'Install Python dependencies'
           - script: |
               python $(scriptPath) --client_id $(client_id) --tenant_id $(tenant_id) --secret_id $(secret_id) --workspace_id $(prod_workspace_id) --pbix_path $(pbixFilePath)
