@@ -7,7 +7,7 @@ pool:
 variables:
   - group: stock_analysis_secret
   - name: pythonVersion
-    value: '3.x'
+    value: '3.13'
   - name: scriptPath
     value: 'deploy_pbix.py'
   - name: pbixFilePath
