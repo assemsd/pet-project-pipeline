@@ -1,9 +1,6 @@
 trigger:
   - main
 
-pool:
-  name: 'Azure Pipelines'
-
 variables:
   - group: stock_analysis_secret
   - name: pythonVersion
@@ -18,6 +15,8 @@ stages:
     displayName: 'Deploy to Development Workspace'
     jobs:
       - job: DeployReportToDev
+        pool:
+          vmImage: 'ubuntu-latest'
         steps:
           - task: UsePythonVersion@0
             inputs:
@@ -25,7 +24,7 @@ stages:
               addToPath: true
           - script: |
               python --version
-              where python
+              which python
             displayName: 'Validate Python Installation'
           - script: |
               python $(scriptPath) --client_id $(client_id) --tenant_id $(tenant_id) --secret_id $(secret_id) --workspace_id $(dev_workspace_id) --pbix_path $(pbixFilePath)
@@ -37,6 +36,8 @@ stages:
     displayName: 'Deploy to Test Workspace'
     jobs:
       - job: DeployReportToTest
+        pool:
+          vmImage: 'ubuntu-latest'
         steps:
           - task: UsePythonVersion@0
             inputs:
@@ -44,7 +45,7 @@ stages:
               addToPath: true
           - script: |
               python --version
-              where python
+              which python
             displayName: 'Validate Python Installation'
           - script: |
               python $(scriptPath) --client_id $(client_id) --tenant_id $(tenant_id) --secret_id $(secret_id) --workspace_id $(test_workspace_id) --pbix_path $(pbixFilePath)
@@ -56,6 +57,8 @@ stages:
     displayName: 'Deploy to Production Workspace'
     jobs:
       - job: DeployReportToProd
+        pool:
+          vmImage: 'ubuntu-latest'
         steps:
           - task: UsePythonVersion@0
             inputs:
@@ -63,7 +66,7 @@ stages:
               addToPath: true
           - script: |
               python --version
-              where python
+              which python
             displayName: 'Validate Python Installation'
           - script: |
               python $(scriptPath) --client_id $(client_id) --tenant_id $(tenant_id) --secret_id $(secret_id) --workspace_id $(prod_workspace_id) --pbix_path $(pbixFilePath)
