@@ -2,7 +2,7 @@ trigger:
   - main
 
 pool:
-  name: 'PetProjectAgent'
+  name: 'Azure Pipelines'
 
 variables:
   - group: stock_analysis_secret
