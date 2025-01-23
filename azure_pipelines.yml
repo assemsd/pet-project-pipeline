@@ -7,13 +7,11 @@ pool:
 variables:
   - group: stock_analysis_secret
   - name: pythonVersion
-    value: '3.13.1'
+    value: '3.x'
   - name: scriptPath
     value: 'deploy_pbix.py'
   - name: pbixFilePath
     value: 'Pet Project Stock.pbix'
-  - name: GITHUB_TOKEN
-    value: $(GitHubToken)
 
 stages:
   - stage: Development
@@ -25,8 +23,6 @@ stages:
             inputs:
               versionSpec: $(pythonVersion)
               addToPath: true
-              githubToken: $(GITHUB_TOKEN)
-            displayName: 'Set Python Version'
           - script: |
               python --version
               where python
@@ -46,8 +42,6 @@ stages:
             inputs:
               versionSpec: $(pythonVersion)
               addToPath: true
-              githubToken: $(GITHUB_TOKEN)
-            displayName: 'Set Python Version'
           - script: |
               python --version
               where python
@@ -67,8 +61,6 @@ stages:
             inputs:
               versionSpec: $(pythonVersion)
               addToPath: true
-              githubToken: $(GITHUB_TOKEN)
-            displayName: 'Set Python Version'
           - script: |
               python --version
               where python
