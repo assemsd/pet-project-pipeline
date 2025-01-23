@@ -1,0 +1,55 @@
+trigger:
+  - main
+
+pool:
+  name: 'PetProjectAgent'
+
+variables:
+- group: stock_analysis_secret
+- name: pythonVersion
+  value: '3.12'
+- name: scriptPath
+  value: 'deploy_pbix.py'
+- name: pbixFilePath
+  value: 'Pet Project Stock.pbix'
+
+stages:
+  - stage: Development
+    displayName: 'Deploy to Development Workspace'
+    jobs:
+      - job: DeployReportToDev
+        steps:
+          - script: |
+              python -m pip install --upgrade pip
+            displayName: 'Install Python dependencies'
+          - script: |
+              python $(scriptPath) --client_id $(client_id) --tenant_id $(tenant_id) --secret_id $(secret_id) --workspace_id $(dev_workspace_id) --pbix_path $(pbixFilePath)
+            displayName: 'Deploy Power BI Report to Development'
+
+  - stage: Test
+    dependsOn: Development
+    condition: succeeded()
+    displayName: 'Deploy to Test Workspace'
+    jobs:
+      - job: DeployReportToTest
+        steps:
+          - script: |
+              python -m pip install --upgrade pip
+            displayName: 'Install Python dependencies'
+          - script: |
+              python $(scriptPath) --client_id $(client_id) --tenant_id $(tenant_id) --secret_id $(secret_id) --workspace_id $(test_workspace_id) --pbix_path $(pbixFilePath)
+            displayName: 'Deploy Power BI Report to Test'
+
+  - stage: Production
+    dependsOn: Test
+    condition: succeeded()
+    displayName: 'Deploy to Production Workspace'
+    jobs:
+      - job: DeployReportToProd
+        steps:
+          - script: |
+              python -m pip install --upgrade pip
+            displayName: 'Install Python dependencies'
+          - script: |
+              python $(scriptPath) --client_id $(client_id) --tenant_id $(tenant_id) --secret_id $(secret_id) --workspace_id $(prod_workspace_id) --pbix_path $(pbixFilePath)
+            displayName: 'Deploy Power BI Report to Production'
