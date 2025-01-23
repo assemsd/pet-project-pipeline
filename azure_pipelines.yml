@@ -8,7 +8,7 @@ variables:
   - name: scriptPath
     value: 'deploy_pbix.py'
   - name: pbixFilePath
-    value: 'Pet Project Stock.pbix'
+    value: 'stock.pbix'
 
 stages:
   - stage: Development
