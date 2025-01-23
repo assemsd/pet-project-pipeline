@@ -49,7 +49,7 @@ def deploy_pbix(workspace_id, pbix_file_path, access_token):
                 print(f"Response status code: {response.status}")
                 print("Unexpected status code received.")
     except urllib.error.HTTPError as e:
-        error_message = json.loads(e.read().decode('utf-8'))
+        error_message = e.read().decode('utf-8')
         print(f"HTTPError occurred:")
         print(f"URL: {e.url}")
         print(f"Code: {e.code}")
