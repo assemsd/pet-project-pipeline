@@ -26,7 +26,7 @@ def get_access_token(tenant_id, client_id, secret_id):
             print('Access Token:', access_token)
             return access_token
     except urllib.error.HTTPError as e:
-        error_message = json.loads(e.read().decode('utf-8'))
+        error_message = e.read().decode('utf-8')
         print('Failed to retrieve token:', error_message)
         sys.exit(1)  # Exit if token not received
 
