@@ -19,6 +19,15 @@ stages:
     jobs:
       - job: DeployReportToDev
         steps:
+          - task: UsePythonVersion@0
+            inputs:
+              versionSpec: $(pythonVersion)
+              addToPath: true
+            displayName: 'Set Python Version'
+          - script: |
+              python --version
+              where python
+            displayName: 'Validate Python Installation'
           - script: |
               python $(scriptPath) --client_id $(client_id) --tenant_id $(tenant_id) --secret_id $(secret_id) --workspace_id $(dev_workspace_id) --pbix_path $(pbixFilePath)
             displayName: 'Deploy Power BI Report to Development'
@@ -30,6 +39,15 @@ stages:
     jobs:
       - job: DeployReportToTest
         steps:
+          - task: UsePythonVersion@0
+            inputs:
+              versionSpec: $(pythonVersion)
+              addToPath: true
+            displayName: 'Set Python Version'
+          - script: |
+              python --version
+              where python
+            displayName: 'Validate Python Installation'
           - script: |
               python $(scriptPath) --client_id $(client_id) --tenant_id $(tenant_id) --secret_id $(secret_id) --workspace_id $(test_workspace_id) --pbix_path $(pbixFilePath)
             displayName: 'Deploy Power BI Report to Test'
@@ -41,6 +59,15 @@ stages:
     jobs:
       - job: DeployReportToProd
         steps:
+          - task: UsePythonVersion@0
+            inputs:
+              versionSpec: $(pythonVersion)
+              addToPath: true
+            displayName: 'Set Python Version'
+          - script: |
+              python --version
+              where python
+            displayName: 'Validate Python Installation'
           - script: |
               python $(scriptPath) --client_id $(client_id) --tenant_id $(tenant_id) --secret_id $(secret_id) --workspace_id $(prod_workspace_id) --pbix_path $(pbixFilePath)
             displayName: 'Deploy Power BI Report to Production'
