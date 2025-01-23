@@ -58,8 +58,8 @@ def deploy_pbix(workspace_id, pbix_file_path, access_token):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument('--workspace', required=True, help="Workspace ID")
-    parser.add_argument('--filePath', required=True, help="Path to PBIX file")
+    parser.add_argument('--workspace_id', required=True, help="Workspace ID")
+    parser.add_argument('--pbix_path', required=True, help="Path to PBIX file")
     parser.add_argument('--tenant_id', required=True, help="Tenant ID")
     parser.add_argument('--client_id', required=True, help="Client ID")
     parser.add_argument('--secret_id', required=True, help="Secret ID")
